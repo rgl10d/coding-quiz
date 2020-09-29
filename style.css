@@ -3,7 +3,7 @@ h1 {
     font-weight: bolder;
 }
 
-#startPara {
+#instructions {
     font-weight: bold;
 }
 
@@ -13,14 +13,14 @@ h1 {
 
 #quiz-landing {
     position: fixed;
-    top: 30%;
+    top: 25%;
     left: 35%;
     width: auto;
 }
 
 #questions {
     position: fixed;
-    top: 30%;
+    top: 25%;
     left: 35%;
     width: auto;
 }
