@@ -25,11 +25,27 @@ function questionOne(){
     for(var i = 0; i < oneAnswers.length; i++){
        var buttons = document.createElement("button");
        var lineBreak = document.createElement("br");
+
         buttons.textContent = oneAnswers[i];
         buttons.setAttribute("class", "btn btn-primary");
         buttons.setAttribute("data-value", oneAnswers[i]);
         buttons.style.marginTop = "10px";
+
         questions.append(buttons);
         questions.append(lineBreak);
-    }
+    };
+
+    questions.addEventListener("click", function(event){
+        if(event.target.matches("button")) {
+            var userAnswer = event.target.getAttribute("data-value");
+
+            if(userAnswer === oneAnswers[2]){
+                console.log("Correct!")
+
+            }
+            else{
+                console.log("Wrong!");
+            }
+        }
+    })
 }
