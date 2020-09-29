@@ -15,4 +15,12 @@ h1 {
     position: fixed;
     top: 30%;
     left: 35%;
+    width: auto;
+}
+
+#questions {
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    width: auto;
 }
