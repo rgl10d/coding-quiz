@@ -1,0 +1,18 @@
+h1 {
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+
+#startPara {
+    font-weight: bold;
+}
+
+#timer {
+    float: right;
+}
+
+#quiz-landing {
+    position: fixed;
+    top: 30%;
+    left: 35%;
+}

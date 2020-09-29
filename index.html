@@ -10,11 +10,23 @@
         <title>Coding Quiz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>Hello World!</h1>>
-        
-        <script src="" async defer></script>
+        <main class="container" id="quiz-landing">
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <h1>Coding Quiz Challenge</h1>
+                    <p id="instructions">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+                    <button type="button" class="btn btn-primary btn-sm" id="start-quiz">Start Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <a href="highscores.html">View Highscores</a>
+        <p id="timer"></p>
+
+        <script src="script.js" async defer></script>
     </body>
 </html>
