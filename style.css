@@ -3,24 +3,33 @@ h1 {
     font-weight: bolder;
 }
 
-#instructions {
+p {
     font-weight: bold;
 }
 
-#timer {
+#timeEl {
     float: right;
 }
 
 #quiz-landing {
     position: fixed;
-    top: 25%;
+    top: 15%;
     left: 35%;
-    width: auto;
+    /* width: auto; */
 }
 
 #questions {
     position: fixed;
-    top: 25%;
+    top: 15%;
     left: 35%;
-    width: auto;
+    display: inline-block;
+    /* width: auto; */
+}
+
+#correct {
+    display: none;
+}
+
+#wrong {
+    display: none;
 }

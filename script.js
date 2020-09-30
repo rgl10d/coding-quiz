@@ -1,27 +1,46 @@
-console.log("Hello world.");
+// Variables
 
 var quizLanding = document.getElementById("quiz-landing");
 var startButton = document.getElementById("start-quiz");
 var questions = document.getElementById("questions");
+var startOver = document.getElementById("start-over");
+var correct = document.getElementById("correct");
+var timeRemaining = 75;
+var interval;
 
+
+// Function definitions
+
+function startTime(){
+    interval = setInterval(function(){
+        timeRemaining--;
+        if(timeRemaining <= 0){
+            timeRemaining = 0;
+            finalScreen();
+        }
+        document.getElementById("timeEl").textContent = "Time: " + timeRemaining;
+    }, 1000)
+}
 
 startButton.addEventListener("click", function(){
     quizLanding.style.display = "none";
     questionOne();
+    startTime();
 })
 
-
-// function timer(){
-
-// }
+function correctAnswer(){
+    correct.style.display = "block";
+}
 
 function questionOne(){
     var oneAnswers = ["1. strings", "2. booleans", "3. alerts", "4. numbers"];
-    var firstQuestion = document.createElement("h1");
 
+    // Question Display
+    var firstQuestion = document.createElement("h1");
     firstQuestion.textContent = "Commonly used data types DO NOT include: ";
     questions.append(firstQuestion);
 
+    // Button Display 
     for(var i = 0; i < oneAnswers.length; i++){
        var buttons = document.createElement("button");
        var lineBreak = document.createElement("br");
@@ -35,17 +54,16 @@ function questionOne(){
         questions.append(lineBreak);
     };
 
+    // Correct or Incorrect event listener
     questions.addEventListener("click", function(event){
         if(event.target.matches("button")) {
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === oneAnswers[2]){
-                console.log("Correct!")
                 questionTwo();
-
             }
             else if(userAnswer === oneAnswers[0] || userAnswer === oneAnswers[1] || userAnswer === oneAnswers[3]){
-                console.log("Wrong!");
+                timeRemaining = timeRemaining - 15;
                 questionTwo();
             }
         
@@ -79,12 +97,11 @@ function questionTwo(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === twoAnswers[2]){
-                console.log("Correct!");
                 questionThree();
 
             }
             else if(userAnswer === twoAnswers[0] || userAnswer === twoAnswers[1] || userAnswer === twoAnswers[3]){
-                console.log("Wrong!");
+                timeRemaining = timeRemaining - 15;
                 questionThree();
             }
         }
@@ -117,12 +134,11 @@ function questionThree(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === threeAnswers[3]){
-                console.log("Correct!");
                 questionFour();
 
             }
             else if(userAnswer === threeAnswers[0] || userAnswer === threeAnswers[1] || userAnswer === threeAnswers[2]){
-                console.log("Wrong!");
+                timeRemaining = timeRemaining - 15;
                 questionFour();
             }
         }
@@ -155,12 +171,12 @@ function questionFour(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === fourAnswers[2]){
-                console.log("Correct!");
                 questionFive();
 
             }
             else if(userAnswer === fourAnswers[0] || userAnswer === fourAnswers[1] || userAnswer === fourAnswers[3]){
-                console.log("Wrong!");
+
+                timeRemaining = timeRemaining - 15;
                 questionFive();
             }
         }
@@ -193,12 +209,11 @@ function questionFive(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === fiveAnswers[3]){
-                console.log("Correct!");
                 finalScreen();
 
             }
             else if(userAnswer === fiveAnswers[0] || userAnswer === fiveAnswers[1] || userAnswer === fiveAnswers[2]){
-                console.log("Wrong!");
+                timeRemaining = timeRemaining - 15;
                 finalScreen()
                 ;
             }
@@ -207,16 +222,39 @@ function questionFive(){
 }
 
 function finalScreen(){
-    questions.innerHTML = "";
     var allDone = document.createElement("h1");
     var finalScore = document.createElement("p");
-    // var initials = document.createElement("");
+    var initials = document.createElement("input");
+    var submitButton = document.createElement("button");
+    var highScoreTable = document.getElementById("highscore");
 
+    clearInterval(interval);
+
+    if(timeRemaining <= 0){
+        timeRemaining = 0;
+    };
+
+    questions.innerHTML = "";
+    // clearInterval(interval);
     allDone.textContent = "All Done!";
-    // finalScore.textContent = "Your final score is " + timeRemaining + "!";
+    finalScore.textContent = "Your final score is " + timeRemaining + "!";
+    initials.setAttribute("class", "form-control");
+    initials.setAttribute("type", "text");
+    submitButton.setAttribute("class", "btn btn-primary");
+    submitButton.setAttribute("id", "submit");
+    submitButton.textContent = "Submit";
 
     questions.append(allDone);
-    // questions.append(finalScore);
+    questions.append(finalScore);
+    questions.append(initials);
+    questions.append(submitButton);
 
-
+    questions.addEventListener("click", function(event){
+        if(event.target.matches("button")) {
+            var userInitials = document.getElementById('submit').value;
+            location.href = "highscores.html";
+            highScoreTable.textContent = userInitials;
+        } 
+    })
 }
+
