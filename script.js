@@ -5,6 +5,10 @@ var startButton = document.getElementById("start-quiz");
 var questions = document.getElementById("questions");
 var startOver = document.getElementById("start-over");
 var correct = document.getElementById("correct");
+var wrong = document.getElementById("wrong");
+var scoreTable = document.getElementById("highscore-table");
+var userInitials = document.getElementById("user-initials").nodeValue;
+var submission = document.getElementById("submission");
 var timeRemaining = 75;
 var interval;
 
@@ -30,6 +34,16 @@ startButton.addEventListener("click", function(){
 
 function correctAnswer(){
     correct.style.display = "block";
+    setTimeout(function(){
+        correct.style.display = "none";
+    }, 800);
+}
+
+function wrongAnswer(){
+    wrong.style.display = "block";
+    setTimeout(function(){
+        wrong.style.display = "none";
+    }, 800);
 }
 
 function questionOne(){
@@ -60,10 +74,12 @@ function questionOne(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === oneAnswers[2]){
+                correctAnswer();
                 questionTwo();
             }
             else if(userAnswer === oneAnswers[0] || userAnswer === oneAnswers[1] || userAnswer === oneAnswers[3]){
                 timeRemaining = timeRemaining - 15;
+                wrongAnswer();
                 questionTwo();
             }
         
@@ -74,8 +90,8 @@ function questionOne(){
 function questionTwo(){
     questions.innerHTML = "";
     var twoAnswers = ["1. quotes", "2. curly Brackets", "3. parentheses", "4. square Brackets"];
+    
     var secondQuestion = document.createElement("h1");
-
     secondQuestion.textContent = "The condition in an if/else statement is enclosed within _____.";
     questions.append(secondQuestion);
 
@@ -97,11 +113,13 @@ function questionTwo(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === twoAnswers[2]){
+                correctAnswer();
                 questionThree();
 
             }
             else if(userAnswer === twoAnswers[0] || userAnswer === twoAnswers[1] || userAnswer === twoAnswers[3]){
                 timeRemaining = timeRemaining - 15;
+                wrongAnswer();
                 questionThree();
             }
         }
@@ -134,11 +152,13 @@ function questionThree(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === threeAnswers[3]){
+                correctAnswer();
                 questionFour();
 
             }
             else if(userAnswer === threeAnswers[0] || userAnswer === threeAnswers[1] || userAnswer === threeAnswers[2]){
                 timeRemaining = timeRemaining - 15;
+                wrongAnswer();
                 questionFour();
             }
         }
@@ -171,12 +191,13 @@ function questionFour(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === fourAnswers[2]){
+                correctAnswer();
                 questionFive();
 
             }
             else if(userAnswer === fourAnswers[0] || userAnswer === fourAnswers[1] || userAnswer === fourAnswers[3]){
-
                 timeRemaining = timeRemaining - 15;
+                wrongAnswer();
                 questionFive();
             }
         }
@@ -209,13 +230,14 @@ function questionFive(){
             var userAnswer = event.target.getAttribute("data-value");
 
             if(userAnswer === fiveAnswers[3]){
+                correctAnswer();
                 finalScreen();
 
             }
             else if(userAnswer === fiveAnswers[0] || userAnswer === fiveAnswers[1] || userAnswer === fiveAnswers[2]){
                 timeRemaining = timeRemaining - 15;
-                finalScreen()
-                ;
+                wrongAnswer();
+                finalScreen();
             }
         }
     })
@@ -224,36 +246,22 @@ function questionFive(){
 function finalScreen(){
     var allDone = document.createElement("h1");
     var finalScore = document.createElement("p");
-    var initials = document.createElement("input");
-    var submitButton = document.createElement("button");
-    var highScoreTable = document.getElementById("highscore");
 
-    clearInterval(interval);
-
-    if(timeRemaining <= 0){
-        timeRemaining = 0;
-    };
-
+    submission.style.display = "inline";
     questions.innerHTML = "";
-    // clearInterval(interval);
+    clearInterval(interval);
     allDone.textContent = "All Done!";
     finalScore.textContent = "Your final score is " + timeRemaining + "!";
-    initials.setAttribute("class", "form-control");
-    initials.setAttribute("type", "text");
-    submitButton.setAttribute("class", "btn btn-primary");
-    submitButton.setAttribute("id", "submit");
-    submitButton.textContent = "Submit";
 
     questions.append(allDone);
     questions.append(finalScore);
-    questions.append(initials);
-    questions.append(submitButton);
 
     questions.addEventListener("click", function(event){
-        if(event.target.matches("button")) {
-            var userInitials = document.getElementById('submit').value;
-            location.href = "highscores.html";
-            highScoreTable.textContent = userInitials;
+        if(event.target.matches("a")) {
+            var tableLine = document.createElement("li");
+            tableLine.textContent = userInitials + " - " + timeRemaining;
+            scoreTable.append(tableLine);
+            
         } 
     })
 }

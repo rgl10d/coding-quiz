@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-sm-6 text-center">
                     <h1>Coding Quiz Challenge</h1>
-                    <p id="instructions">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+                    <p id="instructions">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by fifteen seconds!</p>
                     <button type="button" class="btn btn-primary" id="start-quiz">Start Quiz</button>
                 </div>
             </div>
@@ -28,20 +28,25 @@
             <div class="row">
                 <div class="col-sm-4" id="questions"></div>
             </div>
-        </div>
-
-        <div class="container">
             <div class="row">
-                <div class="col-sm-4" id="correct">
-                    <hr class="my-4" />
+                <div class="col-sm-3 correct-wrong" id="correct">
+                    <hr class="my-2" />
                     <p>Correct!</p>
                 </div>
-                <div class="col-sm-4" id="wrong">
-                    <hr class="my-4" />
+                <div class="col-sm-3 correct-wrong" id="wrong">
+                    <hr class="my-2" />
                     <p>Wrong!</p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-6" id="submission">
+                    <p class="line-up" id="enter-init">Enter your Initials:</p>
+                    <input type="text" class="form-control line-up" id="user-initials"></input>
+                    <a href="highscores.html" class="btn btn-primary line-up" id="submit">Submit</a>
+                </div>
+            </div>
         </div>
+
 
         <a href="highscores.html">View Highscores</a>
         <p id="timeEl">Time: 75</p>
