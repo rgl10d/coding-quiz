@@ -251,11 +251,11 @@ function finalScreen(){
     questions.innerHTML = "";
     submission.style.display = "inline";
     
-    clearInterval(interval);
     if(timeRemaining <= 0){
         timeRemaining = 0;
     }
-
+    clearInterval(interval);
+    
     allDone.textContent = "All Done!";
     finalScore.textContent = "Your final score is " + timeRemaining + "!";
 
