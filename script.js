@@ -7,7 +7,6 @@ var startOver = document.getElementById("start-over");
 var correct = document.getElementById("correct");
 var wrong = document.getElementById("wrong");
 var scoreTable = document.getElementById("highscore-table");
-var userInitials = document.getElementById("user-initials").nodeValue;
 var submission = document.getElementById("submission");
 var timeRemaining = 75;
 var interval;
@@ -26,11 +25,13 @@ function startTime(){
     }, 1000)
 }
 
-startButton.addEventListener("click", function(){
+
+if(startButton){
+    startButton.addEventListener("click", function(){
     quizLanding.style.display = "none";
     questionOne();
     startTime();
-})
+})};
 
 function correctAnswer(){
     correct.style.display = "block";
@@ -247,21 +248,29 @@ function finalScreen(){
     var allDone = document.createElement("h1");
     var finalScore = document.createElement("p");
 
-    submission.style.display = "inline";
     questions.innerHTML = "";
+    submission.style.display = "inline";
+    
     clearInterval(interval);
+    if(timeRemaining <= 0){
+        timeRemaining = 0;
+    }
+
     allDone.textContent = "All Done!";
     finalScore.textContent = "Your final score is " + timeRemaining + "!";
 
     questions.append(allDone);
     questions.append(finalScore);
 
-    questions.addEventListener("click", function(event){
-        if(event.target.matches("a")) {
+    submission.addEventListener("click", function(event){
+        if(event.target.matches("button")) {
+            window.location="highscores.html";
             var tableLine = document.createElement("li");
-            tableLine.textContent = userInitials + " - " + timeRemaining;
+            var previousScore = localStorage.getItem("score");
+            localStorage.setItem("name", initials);
+            localStorage.setItem("score", timeRemaining);
+            tableLine.textContent = "hey stupid";
             scoreTable.append(tableLine);
-            
         } 
     })
 }
